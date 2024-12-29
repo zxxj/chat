@@ -1,0 +1,24 @@
+/* 给 NavLink 添加伪元素 */
+.group {
+  position: relative;
+}
+
+/* 默认状态下不显示图标 */
+.group::after {
+  content: '';
+  position: absolute;
+  bottom: -10px; /* 图标距离文字的位置 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px; /* 图标的大小 */
+  height: 24px;
+  background-image: url('/path/to/your/icon.svg'); /* 替换为你的图标路径 */
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: none; /* 默认隐藏 */
+}
+
+/* 当 tab 被选中时，显示图标 */
+.group.active::after {
+  display: block;
+}

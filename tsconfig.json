@@ -1,4 +1,10 @@
 {
   "files": [],
-  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
+  "compilerOptions": {
+    "baseUrl": "src", // 设置相对路径的基准目录
+    "paths": {
+      "@/*": ["*"] // 配置 @ 符号表示 src 目录
+    }
+  }
 }
