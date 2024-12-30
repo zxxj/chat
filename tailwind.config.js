@@ -8,6 +8,8 @@ export default {
     extend: {
       colors: {
         'custom-purple': '#E65AFF',
+        "custom-id": "#484465",
+        "custom-profile": "#656183"
       },
     },
   },
