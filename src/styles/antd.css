@@ -1,0 +1,12 @@
+.ant-tabs-nav::before {
+	bottom: -5px !important;
+	border-bottom: 1px solid #4D4868 !important;
+}
+
+.ant-tabs-content {
+	color: #fff !important;
+}
+
+.ant-image {
+	margin-right: 10px !important;
+}

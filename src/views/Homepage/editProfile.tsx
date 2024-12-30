@@ -95,6 +95,7 @@ const editProfile = () => {
             {labels.map((label) => (
               <div
                 className="px-6 mb-4 mr-1.5"
+                key={label.key}
                 style={{
                   backgroundColor: '#0D0A22',
                   height: '30px',

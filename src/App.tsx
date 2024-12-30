@@ -5,7 +5,21 @@ import { ConfigProvider } from 'antd'
 
 function App() {
   return (
-    <ConfigProvider theme={{ token: { colorPrimary: '#E65AFF' } }}>
+    <ConfigProvider
+      theme={{
+        token: { colorPrimary: '#E65AFF' },
+        components: {
+          Tabs: {
+            itemHoverColor: '#E65AFF',
+            itemSelectedColor: '#E65AFF',
+            itemColor: '#999',
+            inkBarColor: 'transparent',
+            titleFontSize: 18,
+            horizontalMargin: '10px 0 20px 0'
+          }
+        }
+      }}
+    >
       <Router>
         <div className="relative z-0 bg-primary">
           <div className="relative z-0 bg-black">
