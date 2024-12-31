@@ -28,7 +28,8 @@ const LayoutPage = () => {
     margin: '20px',
     borderRadius: '14px',
     width: '1063px',
-    flex: 'none'
+    flex: 'none',
+    height: 'calc(100vh - 110px)'
   }
 
   const siderStyle: React.CSSProperties = {

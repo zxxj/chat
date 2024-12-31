@@ -10,3 +10,8 @@
 .ant-image {
 	margin-right: 10px !important;
 }
+
+.ant-tabs-content-holder {
+	height: calc(100vh - 200px) !important;
+	overflow-y: scroll !important;
+}

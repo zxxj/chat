@@ -6,6 +6,8 @@ const Moment = ({ activeKey }: { activeKey: string }) => {
   useEffect(() => {
     console.log(111)
   }, [activeKey])
+
+  const a = [1, 2, 3]
   return (
     <div>
       <div
@@ -17,7 +19,9 @@ const Moment = ({ activeKey }: { activeKey: string }) => {
       </div>
 
       <div>
-        <MomentCard />
+        {a.map((item) => (
+          <MomentCard />
+        ))}
       </div>
     </div>
   )

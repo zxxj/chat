@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import MoreIcon from '@/assets/HomePage/more.png'
+import LikeIcon from '@/assets/HomePage/like.png'
+import CommentIcon from '@/assets/HomePage/comment.png'
+import LookIcon from '@/assets/HomePage/look.png'
 import { Image } from 'antd'
 import { DownOutlined, RightOutlined } from '@ant-design/icons'
 
@@ -11,7 +14,7 @@ const MomentCard = () => {
   }
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between mb-12">
       <div className="mr-6 text-center date w-14">
         <div className="text-lg month">12-30</div>
         <div className="time" style={{ color: '#999' }}>
@@ -46,7 +49,7 @@ const MomentCard = () => {
             更多 <DownOutlined />
           </span>
         </div>
-
+        {/* 图片内容 */}
         <div className="mt-4">
           <Image.PreviewGroup
             preview={{
@@ -64,7 +67,7 @@ const MomentCard = () => {
             />
           </Image.PreviewGroup>
         </div>
-
+        {/* 话题 */}
         <div className="flex mt-4 ">
           <div
             className="flex items-center justify-center h-8 px-5 mr-4"
@@ -79,13 +82,30 @@ const MomentCard = () => {
             <div style={{ color: '#999' }}>相亲角</div>
           </div>
         </div>
-
+        {/* 位置 */}
         <div
-          className="flex items-center w-24 h-8 px-4 mt-4 city "
+          className="flex items-center w-24 h-8 px-3.5 mt-4 city cursor-pointer"
           style={{ color: '#484465', backgroundColor: '#0D0A22', borderRadius: 50 }}
         >
           上海市
           <RightOutlined className="ml-2" />
+        </div>
+
+        <div className="flex mt-5">
+          <div className="flex items-center mr-12 cursor-pointer">
+            <img src={LikeIcon} className="w-6 h-6 mr-1" />
+            <span className="text-lg">29</span>
+          </div>
+
+          <div className="flex items-center mr-12 cursor-pointer">
+            <img src={CommentIcon} className="w-6 h-6 mr-1" />
+            <span className="text-lg">120</span>
+          </div>
+
+          <div className="flex items-center mr-12 cursor-pointer">
+            <img src={LookIcon} className="w-6 h-6 mr-1" />
+            <span className="text-lg">3209</span>
+          </div>
         </div>
       </div>
 
