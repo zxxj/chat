@@ -27,6 +27,8 @@ const userStore = createSlice({
     setUserInfo: (state, action: PayloadAction<UserInfo>) => {
       console.log(action.payload, 'acp')
       state.userInfo = action.payload as any
+
+      storage.setItem('test-userIsRegistered', action.payload.email)
     },
     getUserInfo: (state) => {
       return state.userInfo
@@ -37,7 +39,6 @@ const userStore = createSlice({
         email: '',
         picture: ''
       }
-
       storage.removeItem('persist:user')
     }
   }

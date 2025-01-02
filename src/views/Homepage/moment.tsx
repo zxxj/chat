@@ -29,6 +29,7 @@ const Moment = ({ activeKey }: { activeKey: string }) => {
           look: 2974,
           location: '北京市'
         },
+
         {
           date: 2024,
           time: '12:30',
@@ -43,7 +44,7 @@ const Moment = ({ activeKey }: { activeKey: string }) => {
       ]
 
       setMomentData(data)
-    }, 2000)
+    }, 500)
   }
   return (
     <div>
