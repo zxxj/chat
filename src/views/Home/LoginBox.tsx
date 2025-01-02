@@ -4,6 +4,7 @@ import * as jsontokens from 'jsontokens'
 import { useDispatch } from 'react-redux'
 import { setUserInfo } from '@/store/modules/user'
 import { useNavigate } from 'react-router-dom'
+import LogoIcon from '@/assets/HeaderComponent/logo.png'
 
 export const LoginBox = () => {
   const dispatch = useDispatch()
@@ -30,8 +31,7 @@ export const LoginBox = () => {
     <GoogleOAuthProvider clientId={clientId}>
       <div className={style.loginBox}>
         <div className={style.logo}>
-          <div className="mr-4 bg-red-500 icon w-11 h-11"></div>
-          <div className="title">meowchats</div>
+          <img src={LogoIcon} />
         </div>
         <GoogleLogin
           onSuccess={(response) => handleLoginSuccess(response, dispatch)}
