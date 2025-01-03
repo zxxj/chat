@@ -12,7 +12,7 @@ import Register from '@/views/Register'
 export const LoginBox = () => {
   const dispatch = useDispatch()
   const navigae = useNavigate()
-  const [showRegisterModal, setShowRegisterModal] = useState(false)
+  const [showRegisterModal, setShowRegisterModal] = useState(true)
 
   const clientId = '1065142607066-e3h0rcj84t8mm5ao9q15s5v1sqvq01ke.apps.googleusercontent.com'
 
@@ -42,7 +42,7 @@ export const LoginBox = () => {
     if (showRegisterModal) {
       console.log(111)
       Modal.confirm({
-        title: '用户未注册',
+        title: 'Please register first',
         content: <Register />,
         onOk: () => {
           // 在此进行注册流程的逻辑（跳转到注册页面或其他）
