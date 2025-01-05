@@ -30,3 +30,6 @@
   background-color: #555; /* 滚动条滑块的悬停颜色 */
 }
 
+.ant-modal-content {
+	background: conic-gradient( from 68.72154261786936deg at 50% 0%, #E8EDFD 0%, #F8D7FA 60%, #E9D1FE 100%);
+}

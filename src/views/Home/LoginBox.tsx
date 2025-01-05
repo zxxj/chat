@@ -5,14 +5,15 @@ import { useDispatch } from 'react-redux'
 import { setUserInfo } from '@/store/modules/user'
 import { useNavigate } from 'react-router-dom'
 import LogoIcon from '@/assets/HeaderComponent/logo.png'
-import { Modal, App } from 'antd'
-import { useEffect, useState } from 'react'
+import { Modal, App, Button } from 'antd'
+import { useEffect, useRef, useState } from 'react'
 import Register from '@/views/Register'
 
 export const LoginBox = () => {
+  const registerFormRef = useRef<any>(null) // 引用 Register 表单
   const dispatch = useDispatch()
-  const navigae = useNavigate()
-  const [showRegisterModal, setShowRegisterModal] = useState(true)
+  const navigate = useNavigate()
+  const [showRegisterModal, setShowRegisterModal] = useState(false)
 
   const clientId = '1065142607066-e3h0rcj84t8mm5ao9q15s5v1sqvq01ke.apps.googleusercontent.com'
 
@@ -28,36 +29,48 @@ export const LoginBox = () => {
     const currentUserIsRegistered = localStorage.getItem('test-userIsRegistered')
     console.log(currentUserIsRegistered)
     if (currentUserIsRegistered === '222') {
-      navigae('/layout/matching')
+      navigate('/layout/matching')
     } else {
-      setTimeout(() => {
-        navigae('/layout/matching')
-        setShowRegisterModal(true) // 延迟显示弹框
-      }, 1000) // 延迟1秒弹框
+      navigate('/layout/matching')
+      // setShowRegisterModal(true) // 用户未注册，显示注册弹框
     }
+  }
+
+  const handleLoginFailure = (error: any) => {
+    console.error('Login Failed:', error)
+  }
+
+  const handleRegisterOk = () => {
+    // 获取子组件的表单数据
+    const formData = registerFormRef.current.getRegsiterFormData()
+    console.log('Register Form Data:', formData)
+
+    // 在这里可以处理注册确认逻辑，存储数据或跳转
+    setShowRegisterModal(false)
+    // navigate('/layout/matching')
   }
 
   // 弹框显示的条件
   useEffect(() => {
     if (showRegisterModal) {
-      console.log(111)
       Modal.confirm({
-        title: 'Please register first',
-        content: <Register />,
-        onOk: () => {
-          // 在此进行注册流程的逻辑（跳转到注册页面或其他）
-          navigae('/layout/matching')
-        },
-        onCancel: () => {
-          // 用户取消注册，可以处理相关逻辑
-          // navigae('/layout/matching')
-        }
+        width: 1400,
+        content: (
+          <Register
+            ref={registerFormRef} // 传递 ref 给 Register 组件
+          />
+        ),
+        onOk: handleRegisterOk, // 点击 OK 时的操作
+        footer: [
+          <div className="text-center">
+            <Button key="ok" className="text-white bg-custom-purple" onClick={handleRegisterOk}>
+              Complete
+            </Button>
+          </div>
+        ]
       })
     }
-  }, [showRegisterModal, navigae])
-  const handleLoginFailure = (error: any) => {
-    console.error('Login Failed:', error)
-  }
+  }, [showRegisterModal, navigate])
 
   return (
     <App>

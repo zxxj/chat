@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './views/Home'
 import Layoutpage from './views/Layout'
+import MatchingBefore from './views/MatchingBefore'
 import { ConfigProvider } from 'antd'
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/layout/*" element={<Layoutpage />} />
+              <Route path="/matchingbefore" element={<MatchingBefore />} />
             </Routes>
           </div>
         </div>
