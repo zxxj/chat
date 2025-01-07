@@ -1,7 +1,7 @@
 import { Layout } from 'antd'
 import HeaderComponent from './HeaderComponent'
 import Square from '@/views/Square'
-import Matching from '@/views/Matching'
+import MatchingBefore from '@/views/MatchingBefore'
 import Homepage from '@/views/Homepage'
 import Chat from '@/views/Chat'
 import EditProfile from '@/views/Homepage/editProfile'
@@ -55,7 +55,6 @@ const LayoutPage = () => {
           <Sider width={342} style={siderStyle}>
             <Routes>
               <Route path="square" element={<Square />} />
-              <Route path="matching" element={<Matching />} />
               <Route path="homepage" element={<EditProfile />} />
               {/* <Route path="Chat" element={<Chat />} /> */}
             </Routes>
@@ -64,7 +63,7 @@ const LayoutPage = () => {
             <div className="flex-1">
               <Routes>
                 <Route path="square" element={<Square />} />
-                <Route path="matching" element={<Matching />} />
+                <Route path="matchingbefore" element={<MatchingBefore />} />
                 <Route path="homepage" element={<Homepage />} />
                 <Route path="Chat" element={<Chat />} />
               </Routes>
