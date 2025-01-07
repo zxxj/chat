@@ -31,8 +31,9 @@ export const LoginBox = () => {
     if (currentUserIsRegistered === '222') {
       navigate('/layout/matching')
     } else {
-      navigate('/layout/matching')
-      // setShowRegisterModal(true) // 用户未注册，显示注册弹框
+      // navigate('/layout/matching')
+      navigate('/matchingbefore')
+      setShowRegisterModal(true) // 用户未注册，显示注册弹框
     }
   }
 
@@ -42,11 +43,13 @@ export const LoginBox = () => {
 
   const handleRegisterOk = () => {
     // 获取子组件的表单数据
-    const formData = registerFormRef.current.getRegsiterFormData()
-    console.log('Register Form Data:', formData)
+    // setShowRegisterModal(false)
+    Modal.destroyAll()
+
+    // const formData = registerFormRef.current.getRegsiterFormData()
+    // console.log('Register Form Data:', formData)
 
     // 在这里可以处理注册确认逻辑，存储数据或跳转
-    setShowRegisterModal(false)
     // navigate('/layout/matching')
   }
 

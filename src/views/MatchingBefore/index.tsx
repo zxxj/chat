@@ -45,6 +45,7 @@ const MatchingBefore = () => {
       >
         {types.map((item, index) => (
           <div
+            key={item.type}
             style={{
               width: '307px',
               height: '431px',

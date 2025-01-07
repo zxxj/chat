@@ -5,7 +5,7 @@ import { LoginBox } from './LoginBox'
 import StarsCanvas from '@/views/Home/canvas/Stars'
 
 const Home = () => (
-  <div className="w-screen h-screen">
+  <div className="w-screen h-screen overflow-hidden">
     <div className="flex items-center justify-between">
       {/* <motion.div variants={slideIn('left', 'tween', 3, 1)}> */}
       <EarthCanvas />
