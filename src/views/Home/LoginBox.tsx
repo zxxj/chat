@@ -25,6 +25,25 @@ export const LoginBox = () => {
     const { name, picture, email } = decodedToken.payload as any
     await dispatch(setUserInfo({ username: name, picture, email }))
 
+    // 测试chat模块rtm,模拟不同用户登录
+    if (email === 'xinxinxinxinxinzzz@gmail.com') {
+      console.log('xinxinxinxinxinzzz')
+      const obj = {
+        userId: 'xinxin1',
+        token:
+          '007eJxTYDAWCtry7M0UzsL5zYHZh5bYXdA/LMHtUXuMb+JKO/Hb/j8VGMyMjYzNkoySLdPME02MDUwSU1LMLCySU4zMLUzNLQwsve7UpDcEMjL0eD5mYGRgAmJGBhCfnaEiMw+IDAEd4h+f'
+      }
+      localStorage.setItem('xinxin1-test-rtm', JSON.stringify(obj))
+    } else if (email === 'coderzxx2@gmail.com') {
+      console.log('coderzxx2')
+      const obj = {
+        userId: 'xinxin2',
+        token:
+          '007eJxTYNDbZrvDfJZbT1i91P4G83UWFzVjV36cfPWgyMUt/pab42cqMJgZGxmbJRklW6aZJ5oYG5gkpqSYWVgkpxiZW5iaWxhYqr+vSW8IZGSYrp7FwMjABMSMDCA+O0NFZh4QGQEARtYf0A=='
+      }
+      localStorage.setItem('xinxin2-test-rtm', JSON.stringify(obj))
+    }
+
     // 判断用户是否已经注册,如未注册则弹出注册页面
     const currentUserIsRegistered = localStorage.getItem('test-userIsRegistered')
     console.log(currentUserIsRegistered)

@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import AgoraRTM from 'agora-rtx' // 引入 AgoraRTM 库
-
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store'
 const appId = '63236b2c9f7a4304add688cd27857809' // 替换为你的 App ID
-const userId = 'xinxin1' // 用户 ID
+let userId: any = 'xinxin1' // 用户 ID
+let token: string = ''
+let receiverId: string = '' // 接收人id
 const msChannelName = 'Chat_room' // 房间名
 
 const Chat = () => {
@@ -11,6 +14,24 @@ const Chat = () => {
   const [inputText, setInputText] = useState('') // 文本输入框内容
   const [isLoggedIn, setIsLoggedIn] = useState(false) // 用户是否登录
 
+  const userInfo: any = useSelector((state: RootState) => state.user.userInfo)
+
+  console.log(userInfo, 'aaa')
+  if (userInfo.email === 'xinxinxinxinxinzzz@gmail.com') {
+    const info: any = localStorage.getItem('xinxin1-test-rtm')
+    const parsedInfo: { userId: string; token: string } = JSON.parse(info)
+    receiverId = 'xinxin2'
+    userId = parsedInfo.userId
+    token = parsedInfo.token
+  } else if (userInfo.email === 'coderzxx2@gmail.com') {
+    const info: any = localStorage.getItem('xinxin2-test-rtm')
+    const parsedInfo: { userId: string; token: string } = JSON.parse(info)
+    userId = parsedInfo.userId
+    receiverId = 'xinxin1'
+    token = parsedInfo.token
+  }
+
+  console.log(userId)
   // 初始化 RTM 客户端并登录
   useEffect(() => {
     const setupRTM = async () => {
@@ -42,8 +63,6 @@ const Chat = () => {
         })
 
         // 登录
-        const token =
-          '007eJxTYDAWCtry7M0UzsL5zYHZh5bYXdA/LMHtUXuMb+JKO/Hb/j8VGMyMjYzNkoySLdPME02MDUwSU1LMLCySU4zMLUzNLQwsve7UpDcEMjL0eD5mYGRgAmJGBhCfnaEiMw+IDAEd4h+f' // 替换为你的 Token
         const result = await rtm.login({ token })
         console.log('Login Success:', result)
         setIsLoggedIn(true)
@@ -72,10 +91,10 @@ const Chat = () => {
 
     const payload = { type: 'text', message: inputText }
     const publishMessage = JSON.stringify(payload)
-    const publishOptions = { channelType: 'MESSAGE' }
+    const publishOptions = { channelType: 'USER' } // 使用 USER 类型频道进行点对点消息发送
 
     try {
-      const result = await client.publish(msChannelName, publishMessage, publishOptions)
+      const result = await client.publish(receiverId, publishMessage, publishOptions) // 发送消息到用户频道
       setMessages((prevMessages) => [...prevMessages, `${userId}: ${inputText}`]) // 更新本地消息
       setInputText('') // 清空输入框
       console.log('Publish Result:', result)
