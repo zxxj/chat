@@ -57,7 +57,7 @@ const LayoutPage = () => {
               <Route path="square" element={<Square />} />
               <Route path="matching" element={<Matching />} />
               <Route path="homepage" element={<EditProfile />} />
-              <Route path="Chat" element={<Chat />} />
+              {/* <Route path="Chat" element={<Chat />} /> */}
             </Routes>
           </Sider>
           <Content style={contentStyle}>
