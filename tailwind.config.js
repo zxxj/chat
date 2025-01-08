@@ -14,6 +14,12 @@ export default {
         "custom-bg1": '#F4B7FF',
         'custom-matchingbefore-bg': '#0D0A22'
       },
+      height: {
+        "custom-49": "49px"
+      },
+      borderColor: {
+        "custom-chat": "#E65AFF"
+      },
     },
   },
   plugins: [],

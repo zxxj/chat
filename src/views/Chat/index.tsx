@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import AgoraRTM from 'agora-rtx' // 引入 AgoraRTM 库
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
+import { Input, message } from 'antd'
+
+const { TextArea } = Input
 const appId = '63236b2c9f7a4304add688cd27857809' // 替换为你的 App ID
 let userId: any = 'xinxin1' // 用户 ID
 let token: string = ''
@@ -23,15 +26,18 @@ const Chat = () => {
     receiverId = 'xinxin2'
     userId = parsedInfo.userId
     token = parsedInfo.token
-  } else if (userInfo.email === 'coderzxx2@gmail.com') {
+    userInfo.userId = 'xinxin1'
+  } else if (userInfo.email === 'coderxin1@gmail.com') {
     const info: any = localStorage.getItem('xinxin2-test-rtm')
     const parsedInfo: { userId: string; token: string } = JSON.parse(info)
     userId = parsedInfo.userId
     receiverId = 'xinxin1'
     token = parsedInfo.token
+    userInfo.userId = 'xinxin2'
   }
 
   console.log(userId)
+
   // 初始化 RTM 客户端并登录
   useEffect(() => {
     const setupRTM = async () => {
@@ -41,14 +47,27 @@ const Chat = () => {
         setClient(rtm)
 
         rtm.addEventListener('message', (event) => {
+          console.log(event, 'event')
+          // 解析接收到的消息
+          let messageContent = event.message
+
+          try {
+            messageContent = JSON.parse(event.message) // 解析 JSON 字符串
+          } catch (error) {
+            console.log('Received non-JSON message:', event.message)
+          }
+
           // 收到消息时更新消息列表
-          setMessages((prevMessages) => [...prevMessages, `${event.publisher}: ${event.message}`])
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            { publisher: event.publisher, message: messageContent.message || messageContent }
+          ])
         })
 
         rtm.addEventListener('presence', (event) => {
           // 处理用户加入或离开
           if (event.eventType === 'SNAPSHOT') {
-            setMessages((prevMessages) => [...prevMessages, `INFO: I Join`])
+            // setMessages((prevMessages) => [...prevMessages, `INFO: I Join`])
           } else {
             setMessages((prevMessages) => [
               ...prevMessages,
@@ -59,7 +78,7 @@ const Chat = () => {
 
         rtm.addEventListener('status', (event) => {
           // 连接状态变化
-          setMessages((prevMessages) => [...prevMessages, `INFO: ${JSON.stringify(event)}`])
+          // setMessages((prevMessages) => [...prevMessages, `INFO: ${JSON.stringify(event)}`])
         })
 
         // 登录
@@ -89,13 +108,14 @@ const Chat = () => {
   const publishMessage = async () => {
     if (inputText.trim() === '') return // 防止发送空消息
 
-    const payload = { type: 'text', message: inputText }
+    const payload = { type: 'text', message: inputText, publisher: userId }
     const publishMessage = JSON.stringify(payload)
     const publishOptions = { channelType: 'USER' } // 使用 USER 类型频道进行点对点消息发送
 
     try {
       const result = await client.publish(receiverId, publishMessage, publishOptions) // 发送消息到用户频道
-      setMessages((prevMessages) => [...prevMessages, `${userId}: ${inputText}`]) // 更新本地消息
+      // 更新本地消息（消息需要是对象格式）
+      setMessages((prevMessages) => [...prevMessages, { publisher: userId, message: inputText }]) // 更新本地消息
       setInputText('') // 清空输入框
       console.log('Publish Result:', result)
     } catch (status) {
@@ -104,35 +124,31 @@ const Chat = () => {
   }
 
   return (
-    <div id="container" style={{ width: '800px', margin: '0 auto', padding: '20px' }}>
-      <h1>Hello RTM!</h1>
-
-      <div
-        id="textDisplay"
-        style={{
-          width: '100%',
-          height: '500px',
-          border: '1px solid #b0b0b0',
-          marginBottom: '20px',
-          overflowY: 'auto',
-          padding: '10px',
-          boxSizing: 'border-box',
-          textAlign: 'left'
-        }}
-      >
+    <div className="flex flex-col w-full h-full p-6">
+      <div className="border-b h-custom-49 " style={{ borderColor: '#4D4868', lineHeight: '49px' }}>
+        111
+      </div>
+      <div id="textDisplay" className="flex-1 overflow-y-scroll">
+        <div>信息</div>
         {messages.map((msg, index) => (
-          <p key={index}>{msg}</p>
+          <div
+            key={index}
+            className={`flex ${
+              msg.publisher === userInfo.userId ? 'justify-end' : 'justify-start'
+            } p-2`}
+          >
+            {msg.message}
+          </div>
         ))}
       </div>
-
-      <div id="inputContainer" style={{ display: 'flex', alignItems: 'center' }}>
-        <input
-          type="text"
-          id="textInput"
-          placeholder="Enter text"
+      <div>
+        <TextArea
+          className="text-white border-custom-chat"
+          style={{ background: '#16132D' }}
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          style={{ width: 'calc(100% - 100px)', padding: '5px', marginRight: '10px' }}
+          placeholder="Controlled autosize"
+          autoSize={{ minRows: 3, maxRows: 5 }}
         />
         <button
           id="submitButton"

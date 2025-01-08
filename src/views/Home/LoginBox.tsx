@@ -31,15 +31,15 @@ export const LoginBox = () => {
       const obj = {
         userId: 'xinxin1',
         token:
-          '007eJxTYDAWCtry7M0UzsL5zYHZh5bYXdA/LMHtUXuMb+JKO/Hb/j8VGMyMjYzNkoySLdPME02MDUwSU1LMLCySU4zMLUzNLQwsve7UpDcEMjL0eD5mYGRgAmJGBhCfnaEiMw+IDAEd4h+f'
+          '007eJxTYPj0bJ9foLTHckanxJvuk6zLMrJ8rr5euk/g6kvR3w9ln5gpMJgZGxmbJRklW6aZJ5oYG5gkpqSYWVgkpxiZW5iaWxhYxi2sS28IZGTos1NiYWRgYmAEQhCfnaEiMw+IDAGImCBU'
       }
       localStorage.setItem('xinxin1-test-rtm', JSON.stringify(obj))
-    } else if (email === 'coderzxx2@gmail.com') {
-      console.log('coderzxx2')
+    } else if (email === 'coderxin1@gmail.com') {
+      console.log('coderxin1')
       const obj = {
         userId: 'xinxin2',
         token:
-          '007eJxTYNDbZrvDfJZbT1i91P4G83UWFzVjV36cfPWgyMUt/pab42cqMJgZGxmbJRklW6aZJ5oYG5gkpqSYWVgkpxiZW5iaWxhYqr+vSW8IZGSYrp7FwMjABMSMDCA+O0NFZh4QGQEARtYf0A=='
+          '007eJxTYHju/p6RZ9svqSe2Gwxysu5v7LVVORurVPpHftny5nncO1sUGMyMjYzNkoySLdPME02MDUwSU1LMLCySU4zMLUzNLQws6xfWpTcEMjIc7K9jZWRgYmAEQhCfnaEiMw+IjAB4hSC1'
       }
       localStorage.setItem('xinxin2-test-rtm', JSON.stringify(obj))
     }
