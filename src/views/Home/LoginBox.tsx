@@ -31,7 +31,7 @@ export const LoginBox = () => {
       const obj = {
         userId: 'xinxin1',
         token:
-          '007eJxTYPj0bJ9foLTHckanxJvuk6zLMrJ8rr5euk/g6kvR3w9ln5gpMJgZGxmbJRklW6aZJ5oYG5gkpqSYWVgkpxiZW5iaWxhYxi2sS28IZGTos1NiYWRgYmAEQhCfnaEiMw+IDAGImCBU'
+          '007eJxTYNAVuMN2sFLqbLu49WZ77p4b7jL2TwR0Dty/wcMfdj7RNUiBwczYyNgsySjZMs080cTYwCQxJcXMwiI5xcjcwtTcwsBS8Et9ekMgI0NnxjoWRgYmBkYgBPHZGSoy84DIEABzMx16'
       }
       localStorage.setItem('xinxin1-test-rtm', JSON.stringify(obj))
     } else if (email === 'coderxin1@gmail.com') {
@@ -39,7 +39,7 @@ export const LoginBox = () => {
       const obj = {
         userId: 'xinxin2',
         token:
-          '007eJxTYHju/p6RZ9svqSe2Gwxysu5v7LVVORurVPpHftny5nncO1sUGMyMjYzNkoySLdPME02MDUwSU1LMLCySU4zMLUzNLQws6xfWpTcEMjIc7K9jZWRgYmAEQhCfnaEiMw+IjAB4hSC1'
+          '007eJxTYLDoey+XdfT4DMEvvRWfFqbu4GHdkL/wuODRIrlZ7QkHvqYqMJgZGxmbJRklW6aZJ5oYG5gkpqSYWVgkpxiZW5iaWxhYqn+pT28IZGS4eESPlZGBiYERCEF8doaKzDwgMgIAuu0hfw=='
       }
       localStorage.setItem('xinxin2-test-rtm', JSON.stringify(obj))
     }
@@ -56,8 +56,8 @@ export const LoginBox = () => {
     }
   }
 
-  const handleLoginFailure = (error: any) => {
-    console.error('Login Failed:', error)
+  const handleLoginFailure = () => {
+    console.error('Login Failed')
   }
 
   const handleRegisterOk = () => {

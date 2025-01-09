@@ -5,6 +5,7 @@ import MatchingBefore from '@/views/MatchingBefore'
 import Homepage from '@/views/Homepage'
 import Chat from '@/views/Chat'
 import EditProfile from '@/views/Homepage/editProfile'
+import FriebdList from '@/views/FriendList'
 import { Routes, Route } from 'react-router-dom'
 
 const LayoutPage = () => {
@@ -56,7 +57,7 @@ const LayoutPage = () => {
             <Routes>
               <Route path="square" element={<Square />} />
               <Route path="homepage" element={<EditProfile />} />
-              {/* <Route path="Chat" element={<Chat />} /> */}
+              <Route path="Chat" element={<FriebdList />} />
             </Routes>
           </Sider>
           <Content style={contentStyle}>
