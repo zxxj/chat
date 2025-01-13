@@ -6,9 +6,9 @@ import { Input, Spin } from 'antd'
 
 const { TextArea } = Input
 const appId = '63236b2c9f7a4304add688cd27857809' // 替换为你的 App ID
-let userId: any = '' // 用户 ID
-let token: string = ''
-let receiverId: string = '' // 接收人id
+const userId: any = '' // 用户 ID
+const token: string = ''
+const receiverId: string = '' // 接收人id
 const msChannelName = 'Chat_room' // 房间名
 
 const Chat = () => {
@@ -21,22 +21,24 @@ const Chat = () => {
   const userInfo: any = useSelector((state: RootState) => state.user.userInfo)
 
   // - 模拟测试1v1聊天
-  const getUserInfoFromLocalStorage = (key: string) => {
-    const info: any = localStorage.getItem(key)
-    return JSON.parse(info) as { userId: string; token: string }
-  }
+  // const getUserInfoFromLocalStorage = (key: string) => {
+  //   const info: any = localStorage.getItem(key)
+  //   return JSON.parse(info) as { userId: string; token: string }
+  // }
 
-  if (userInfo.email === 'xinxinxinxinxinzzz@gmail.com') {
-    const parsedInfo = getUserInfoFromLocalStorage('xinxin1-test-rtm')
-    receiverId = 'xinxin2'
-    userId = parsedInfo.userId
-    token = parsedInfo.token
-  } else if (userInfo.email === 'coderxin1@gmail.com') {
-    const parsedInfo = getUserInfoFromLocalStorage('xinxin2-test-rtm')
-    userId = parsedInfo.userId
-    receiverId = 'xinxin1'
-    token = parsedInfo.token
-  }
+  // if (userInfo.email === 'xinxinxinxinxinzzz@gmail.com') {
+  //   debugger
+  //   const parsedInfo = getUserInfoFromLocalStorage('xinxin1-test-rtm')
+  //   receiverId = 'xinxin2'
+  //   userId = parsedInfo.userId
+  //   token = parsedInfo.token
+  // } else if (userInfo.email === 'coderxin1@gmail.com') {
+  //   debugger
+  //   const parsedInfo = getUserInfoFromLocalStorage('xinxin2-test-rtm')
+  //   userId = parsedInfo.userId
+  //   receiverId = 'xinxin1'
+  //   token = parsedInfo.token
+  // }
   // - 模拟测试1v1聊天
 
   // 初始化 RTM 客户端并登录

@@ -7,7 +7,8 @@ const userInfo: UserState = {
   userInfo: {
     username: '',
     email: '',
-    picture: ''
+    picture: '',
+    token: ''
   }
 }
 
@@ -31,15 +32,17 @@ const userStore = createSlice({
       storage.setItem('test-userIsRegistered', action.payload.email)
     },
     getUserInfo: (state) => {
-      return state.userInfo
+      return state.userInfo as any
     },
     logout: (state) => {
       state.userInfo = {
         username: '',
         email: '',
-        picture: ''
+        picture: '',
+        token: ''
       }
       storage.removeItem('persist:user')
+      localStorage.clear()
     }
   }
 })
