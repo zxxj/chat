@@ -44,7 +44,7 @@ const Register = forwardRef((props, ref) => {
   const getTagsList = async () => {
     try {
       const tagList = await getTags({ current: 1, pageSize: 999 })
-      setTags(tagList.records)
+      setTags(tagList.data.records)
       console.log('Tags from API:', tagList.records)
     } catch (error) {
       console.error('Failed to fetch tags:', error)
@@ -57,7 +57,7 @@ const Register = forwardRef((props, ref) => {
         if (prevSelected.includes(val)) {
           // 如果已经选中，取消选中
           const updatedSelected = prevSelected.filter((item) => item !== val)
-          form.setFieldsValue({ character: updatedSelected }) // 更新表单的 tagIds 字段
+          form.setFieldsValue({ tagIds: updatedSelected }) // 更新表单的 tagIds 字段
           return updatedSelected
         } else {
           // 如果未选中，添加选中

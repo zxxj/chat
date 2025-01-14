@@ -6,7 +6,7 @@ import { setUserInfo } from '@/store/modules/user'
 import { useNavigate } from 'react-router-dom'
 import LogoIcon from '@/assets/HeaderComponent/logo.png'
 import { App, message } from 'antd'
-import { login } from '@/http/models/user'
+import { login, user } from '@/http/models/user'
 
 export const LoginBox = () => {
   const dispatch = useDispatch()
@@ -20,7 +20,7 @@ export const LoginBox = () => {
 
     try {
       const token = await login({ email, sub })
-      debugger
+
       if (!token) {
         // 如果没有数据，说明用户未注册
         localStorage.setItem('needRegister', 'true') // 未注册用户刷新页面时,确保刷新后注册弹框不消失
@@ -29,13 +29,14 @@ export const LoginBox = () => {
         navigate('/matchingbefore')
       } else {
         // 登录成功，保存用户信息和 token
-        debugger
+        localStorage.setItem('token', token.data)
+        const info = await user()
         await dispatch(
           setUserInfo({
-            username: name,
-            picture,
-            email,
-            token: token
+            username: info.data.username,
+            picture: info.data.avatar,
+            email: info.data.email,
+            token: info.data.token
           })
         )
         navigate('/matchingbefore')

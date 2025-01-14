@@ -18,13 +18,10 @@ const instance: AxiosInstance = axios.create({
 // 请求拦截器
 instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    // 从 store 中获取 token
-    debugger
-    const token = store.getState().user.userInfo.token
-    if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`
-    } else {
-      config.headers.Authorization = ''
+    const token = localStorage.getItem('token') // 从本地存储获取token
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}` // 设置请求头
+      config.headers.token = token // 设置请求头
     }
     return config
   },
@@ -36,14 +33,7 @@ instance.interceptors.request.use(
 // 响应拦截器
 instance.interceptors.response.use(
   (response: AxiosResponse) => {
-    // 对响应数据做点什么
-    // const { data } = response
-    // // 可以根据后端返回的状态码或其他标识进行统一处理
-    // if (data.code === 200) {
-    //   return data
-    // }
-    debugger
-    if (response.data || response.data === '') {
+    if (response.data === '') {
       return response.data
     } else {
       return response
