@@ -1,4 +1,4 @@
-const Matching = () => {
+const Matching: React.FC = () => {
   return <div>Matching</div>
 }
 

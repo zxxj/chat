@@ -3,7 +3,11 @@ import PushmomentIcon from '@/assets/HomePage/pushmoment.png'
 import MomentCard from './moment-card'
 import type { MomentParam } from '@/types/momentCard'
 
-const Moment = ({ activeKey }: { activeKey: string }) => {
+interface MomentProps {
+  activeKey: string
+}
+
+const Moment: React.FC<MomentProps> = ({ activeKey }: { activeKey: string }) => {
   useEffect(() => {
     console.log(111)
     getdata()

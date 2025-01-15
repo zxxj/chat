@@ -1,11 +1,12 @@
 import { RootState } from '@/store'
-import { Avatar } from 'antd'
+import { Avatar, Modal } from 'antd'
 import { useSelector } from 'react-redux'
 import EditUsernameIcon from '@/assets/HomePage/edit_username.png'
 import BrithdayIcon from '@/assets/HomePage/brithday.png'
 import VioceIcon from '@/assets/HomePage/vioce.png'
 import { RightOutlined } from '@ant-design/icons'
-const editProfile = () => {
+import { useState } from 'react'
+const EditProfile: React.FC = () => {
   const userInfo = useSelector((state: RootState) => state.user.userInfo)
 
   const labels = [
@@ -34,6 +35,20 @@ const editProfile = () => {
       key: 5
     }
   ]
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const showModal = () => {
+    setIsModalOpen(true)
+  }
+
+  const handleOk = () => {
+    setIsModalOpen(false)
+  }
+
+  const handleCancel = () => {
+    setIsModalOpen(false)
+  }
   return (
     <div>
       <div className="basic">
@@ -43,7 +58,7 @@ const editProfile = () => {
 
         <div className="flex justify-center mt-4 mb-4 text-lg username ">
           <div className="mr-4">{userInfo.username}</div>
-          <img src={EditUsernameIcon} alt="edit" className="cursor-pointer" />
+          <img src={EditUsernameIcon} alt="edit" className="cursor-pointer" onClick={showModal} />
         </div>
         <div className="userid text-custom-id">ID：289767</div>
 
@@ -110,8 +125,12 @@ const editProfile = () => {
           </div>
         </div>
       </div>
+
+      <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <p>Some contents...</p>
+      </Modal>
     </div>
   )
 }
 
-export default editProfile
+export default EditProfile

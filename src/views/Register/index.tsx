@@ -1,10 +1,10 @@
-// import { PlusOutlined } from '@ant-design/icons'
-import { DatePicker, Form, Input, Upload } from 'antd'
+import { DatePicker, Form, Input } from 'antd'
 import { CalendarOutlined } from '@ant-design/icons'
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react'
 import { getTags } from '@/http/models/user'
 
-const Register = forwardRef((props, ref) => {
+const Register: React.FC<any> = forwardRef((props, ref) => {
+  console.log(props)
   const userInfostr = JSON.parse(localStorage.getItem('persist:user') as any)
   const userInfo = JSON.parse(userInfostr.userInfo)
 
@@ -109,25 +109,6 @@ const Register = forwardRef((props, ref) => {
                 alt="avatar"
                 style={{ width: '100%', borderRadius: '50%' }}
               />
-              {/* <Upload
-                action="/upload.do"
-                listType="picture-card"
-                maxCount={1}
-                showUploadList={false}
-              >
-                {userInfo.picture ? (
-                  <img
-                    src={userInfo.picture}
-                    alt="avatar"
-                    style={{ width: '100%', borderRadius: '50%' }}
-                  />
-                ) : (
-                  <button style={{ border: 0, background: 'none' }} type="button">
-                    <PlusOutlined />
-                    <div style={{ marginTop: 8 }}>Upload</div>
-                  </button>
-                )}
-              </Upload> */}
             </Form.Item>
 
             <Form.Item

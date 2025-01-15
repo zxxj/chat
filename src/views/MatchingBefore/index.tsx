@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux'
 import { setUserInfo } from '@/store/modules/user'
 import { message } from 'antd'
 
-const MatchingBefore = () => {
+const MatchingBefore: React.FC = () => {
   const { Header } = Layout
   const navigate = useNavigate()
   const [showRegisterModal, setShowRegisterModal] = useState(false)

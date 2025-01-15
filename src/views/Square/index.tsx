@@ -1,7 +1,7 @@
 import { Upload } from 'antd'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
-const Square = () => {
+const Square: React.FC = () => {
   const { token } = useSelector((state: RootState) => state.user.userInfo)
 
   const customRequest = async (options: any) => {

@@ -3,7 +3,7 @@ import storage from 'redux-persist/lib/storage' // 使用 localStorage 作为存
 import { persistReducer } from 'redux-persist'
 import { UserState, UserInfo } from './user.d'
 
-const userInfo: UserState = {
+const initialState: UserState = {
   userInfo: {
     username: '',
     email: '',
@@ -21,19 +21,13 @@ const persistConfig = {
 
 const userStore = createSlice({
   name: 'user',
-  initialState: {
-    userInfo
-  },
+  initialState,
   reducers: {
     setUserInfo: (state, action: PayloadAction<UserInfo>) => {
       console.log(action.payload, 'acp')
-      state.userInfo = action.payload as any
-
-      storage.setItem('test-userIsRegistered', action.payload.email)
+      state.userInfo = action.payload
     },
-    getUserInfo: (state) => {
-      return state.userInfo as any
-    },
+    getUserInfo: (state) => state,
     logout: (state) => {
       state.userInfo = {
         username: '',

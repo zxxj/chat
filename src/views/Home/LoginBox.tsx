@@ -8,7 +8,7 @@ import LogoIcon from '@/assets/HeaderComponent/logo.png'
 import { App, message } from 'antd'
 import { login, user } from '@/http/models/user'
 
-export const LoginBox = () => {
+export const LoginBox: React.FC = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const clientId = '1065142607066-e3h0rcj84t8mm5ao9q15s5v1sqvq01ke.apps.googleusercontent.com'

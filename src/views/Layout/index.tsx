@@ -4,11 +4,11 @@ import Square from '@/views/Square'
 import MatchingBefore from '@/views/MatchingBefore'
 import Homepage from '@/views/Homepage'
 import Chat from '@/views/Chat'
-import EditProfile from '@/views/Homepage/editProfile'
+import EditProfile from '@/views/Homepage/EditProfile'
 import FriebdList from '@/views/FriendList'
 import { Routes, Route } from 'react-router-dom'
 
-const LayoutPage = () => {
+const LayoutPage: React.FC = () => {
   const { Header, Sider, Content } = Layout
 
   const headerStyle: React.CSSProperties = {

@@ -5,8 +5,9 @@ import CommentIcon from '@/assets/HomePage/comment.png'
 import LookIcon from '@/assets/HomePage/look.png'
 import { Image } from 'antd'
 import { DownOutlined, RightOutlined } from '@ant-design/icons'
-import { MomentParam } from '@/types/momentCard'
-const MomentCard = ({ data }: MomentParam) => {
+import { MomentCardProps } from '@/types/momentCard'
+
+const MomentCard: React.FC<MomentCardProps> = ({ data }: MomentCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false) // 控制文本是否展开
 
   console.log(data)

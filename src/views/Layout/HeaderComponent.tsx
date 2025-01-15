@@ -12,7 +12,7 @@ import { Avatar, Dropdown, Space, Modal, message } from 'antd'
 import type { MenuProps } from 'antd'
 import { logout } from '@/store/modules/user'
 
-const Header = () => {
+const Header: React.FC = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const userInfo: any = useSelector((state: RootState) => state.user.userInfo)

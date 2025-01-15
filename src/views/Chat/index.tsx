@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback, useMemo, useRef } from 'react'
 import AgoraRTM from 'agora-rtx'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/store'
+// import { useSelector } from 'react-redux'
+// import { RootState } from '@/store'
 import { Input, Spin } from 'antd'
 
 const { TextArea } = Input
@@ -11,14 +11,14 @@ const token: string = ''
 const receiverId: string = '' // 接收人id
 const msChannelName = 'Chat_room' // 房间名
 
-const Chat = () => {
+const Chat: React.FC = () => {
   const [client, setClient] = useState<any>(null) // 使用明确的类型
   const [messages, setMessages] = useState<{ publisher: string; message: string }[]>([])
   const [inputText, setInputText] = useState<string>('')
   const [isSending, setIsSending] = useState(false) // 添加发送状态
   const textAreaRef = useRef<any>(null) // 添加 ref
 
-  const userInfo: any = useSelector((state: RootState) => state.user.userInfo)
+  // const userInfo: any = useSelector((state: RootState) => state.user.userInfo)
 
   // - 模拟测试1v1聊天
   // const getUserInfoFromLocalStorage = (key: string) => {

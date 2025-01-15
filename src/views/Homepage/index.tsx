@@ -4,7 +4,7 @@ import type { TabsProps } from 'antd'
 import Moment from './moment'
 import Like from './like'
 
-const Homepage = () => {
+const Homepage: React.FC = () => {
   const [activeKey, setActiveKey] = useState('1')
 
   const onChange = (key: string) => {

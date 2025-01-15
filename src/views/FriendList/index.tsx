@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const FriendList = () => {
+const FriendList: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'chat' | 'address'>('chat')
 
   return (

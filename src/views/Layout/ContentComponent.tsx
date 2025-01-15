@@ -1,4 +1,4 @@
-const ContentComponent = () => {
+const ContentComponent: React.FC = () => {
   return <div>123</div>
 }
 

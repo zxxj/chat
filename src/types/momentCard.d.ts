@@ -10,4 +10,8 @@ interface MomentParam {
   location: string
 }
 
-export { MomentParam }
+interface MomentCardProps {
+  data: MomentParam
+}
+
+export type { MomentParam, MomentCardProps }
