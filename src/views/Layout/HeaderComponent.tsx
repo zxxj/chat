@@ -16,8 +16,7 @@ const Header: React.FC = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const userInfo: any = useSelector((state: RootState) => state.user.userInfo)
-
-  console.log(userInfo)
+  const url = import.meta.env.VITE_BASE_URL_FILE_REVIEW
   const tabs: Tabs[] = [
     {
       path: '/layout/chat',
@@ -124,7 +123,12 @@ const Header: React.FC = () => {
         <div className="ml-20 cursor-pointer avatar">
           <Avatar
             style={{ backgroundColor: '#87d068' }}
-            src={<img src={userInfo.picture} alt="avatar" />}
+            src={
+              <img
+                src={userInfo.avatar !== '' ? url + userInfo.avatar : userInfo.picture}
+                alt="avatar"
+              />
+            }
           />
 
           <Dropdown menu={{ items, onClick }} trigger={['click']} className="ml-2.5">

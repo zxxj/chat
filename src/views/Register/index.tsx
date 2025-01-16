@@ -1,7 +1,7 @@
 import { DatePicker, Form, Input } from 'antd'
 import { CalendarOutlined } from '@ant-design/icons'
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react'
-import { getTags } from '@/http/models/user'
+import { getTags } from '@/http/modules/user'
 
 const Register: React.FC<any> = forwardRef((props, ref) => {
   console.log(props)
@@ -116,7 +116,7 @@ const Register: React.FC<any> = forwardRef((props, ref) => {
               name="username"
               rules={[{ required: true, message: 'Please input your name!' }]}
             >
-              <Input className="w-72 rounded-3xl " />
+              <Input className="w-72 rounded-3xl" />
             </Form.Item>
 
             <Form.Item

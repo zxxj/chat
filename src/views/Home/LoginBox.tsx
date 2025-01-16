@@ -6,7 +6,7 @@ import { setUserInfo } from '@/store/modules/user'
 import { useNavigate } from 'react-router-dom'
 import LogoIcon from '@/assets/HeaderComponent/logo.png'
 import { App, message } from 'antd'
-import { login, user } from '@/http/models/user'
+import { login, user } from '@/http/modules/user'
 
 export const LoginBox: React.FC = () => {
   const dispatch = useDispatch()
@@ -31,14 +31,8 @@ export const LoginBox: React.FC = () => {
         // 登录成功，保存用户信息和 token
         localStorage.setItem('token', token.data)
         const info = await user()
-        await dispatch(
-          setUserInfo({
-            username: info.data.username,
-            picture: info.data.avatar,
-            email: info.data.email,
-            token: info.data.token
-          })
-        )
+        info.data.picture = picture
+        await dispatch(setUserInfo(info.data))
         navigate('/matchingbefore')
       }
     } catch (error) {

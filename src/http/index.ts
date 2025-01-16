@@ -8,7 +8,7 @@ import { store } from '@/store'
 
 // 创建请求实例
 const instance: AxiosInstance = axios.create({
-  baseURL: 'http://49.234.200.97:8080', // 设置基础URL
+  baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 10000, // 设置超时时间
   headers: {
     'Content-Type': 'application/json'

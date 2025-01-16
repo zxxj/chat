@@ -5,9 +5,31 @@ import { UserState, UserInfo } from './user.d'
 
 const initialState: UserState = {
   userInfo: {
-    username: '',
-    email: '',
     picture: '',
+    authority: 0,
+    avatar: '',
+    birthday: '',
+    character: '',
+    email: '',
+    familyName: '',
+    followers: 0,
+    follows: 0,
+    gas: {
+      personnel: 0,
+      platform: 0,
+      total: 0
+    },
+    givenName: '',
+    id: 0,
+    jti: '',
+    matches: [],
+    memberLevel: '',
+    nbf: '',
+    sex: '',
+    tagIds: [],
+    username: '',
+    views: 0,
+    voice: '',
     token: ''
   }
 }
@@ -27,12 +49,34 @@ const userStore = createSlice({
       console.log(action.payload, 'acp')
       state.userInfo = action.payload
     },
-    getUserInfo: (state) => state,
+    getUserInfo: (state) => state.userInfo,
     logout: (state) => {
       state.userInfo = {
-        username: '',
-        email: '',
         picture: '',
+        authority: 0,
+        avatar: '',
+        birthday: '',
+        character: '',
+        email: '',
+        familyName: '',
+        followers: 0,
+        follows: 0,
+        gas: {
+          personnel: 0,
+          platform: 0,
+          total: 0
+        },
+        givenName: '',
+        id: 0,
+        jti: '',
+        matches: [],
+        memberLevel: '',
+        nbf: '',
+        sex: '',
+        tagIds: [],
+        username: '',
+        views: 0,
+        voice: '',
         token: ''
       }
       storage.removeItem('persist:user')
