@@ -1,3 +1,6 @@
+/**
+ * Page«PostVo»
+ */
 export interface Response {
   countId?: string
   current?: number

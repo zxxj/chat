@@ -55,7 +55,7 @@ const LayoutPage: React.FC = () => {
         <Layout style={layoutStyle}>
           <Sider width={342} style={siderStyle}>
             <Routes>
-              <Route path="square" element={<Square />} />
+              {/* <Route path="square" element={<Square />} /> */}
               <Route path="homepage" element={<EditProfile />} />
               <Route path="Chat" element={<FriebdList />} />
             </Routes>

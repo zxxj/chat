@@ -80,6 +80,9 @@ importers:
       three:
         specifier: ^0.171.0
         version: 0.171.0
+      wavesurfer.js:
+        specifier: ^7.8.16
+        version: 7.8.16
     devDependencies:
       '@eslint/js':
         specifier: ^9.17.0
@@ -2271,6 +2274,9 @@ packages:
         optional: true
       yaml:
         optional: true
+
+  wavesurfer.js@7.8.16:
+    resolution: {integrity: sha512-lhQF42A4Wn7ug5bixaqGK53qWF2minWdXlzxPtLV+QoVH3WgvVSdsP2HBaHRbkfT2Lh67kJG6CquFdukmf95gg==}
 
   web-streams-polyfill@3.3.3:
     resolution: {integrity: sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==}
@@ -4601,6 +4607,8 @@ snapshots:
       fsevents: 2.3.3
       jiti: 1.21.7
       yaml: 2.7.0
+
+  wavesurfer.js@7.8.16: {}
 
   web-streams-polyfill@3.3.3: {}
 

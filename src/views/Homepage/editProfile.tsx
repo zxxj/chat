@@ -24,17 +24,19 @@ const EditProfile: React.FC = () => {
 
   useEffect(() => {
     getTagsList()
-  }, [userInfo.tagIds])
+  }, [userInfo.tagIds, userInfo])
 
   const getTagsList = async () => {
     try {
       const tagList = await getTags({ current: 1, pageSize: 999 })
-
-      const myTags = tagList.data.records.filter((tag) => userInfo.tagIds.includes(tag.id))
+      const myTags = tagList.data.records.filter((tag: any) =>
+        (userInfo.tagIds || []).includes(tag.id)
+      )
       setMyTags(myTags)
       setTags(tagList.data.records)
     } catch (error) {
       console.error('Failed to fetch tags:', error)
+      message.error('Failed to load tags')
     }
   }
 

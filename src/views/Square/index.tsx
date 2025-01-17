@@ -1,51 +1,26 @@
-import { Upload } from 'antd'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/store'
+import { useEffect, useState } from 'react'
+import type { PostVo } from '@/types/square'
+import { listSquare } from '@/http/modules/square'
+import MomentCard from '@/views/Homepage/moment-card'
+
 const Square: React.FC = () => {
-  const { token } = useSelector((state: RootState) => state.user.userInfo)
+  const [squareData, setSquareData] = useState<PostVo[]>([])
 
-  const customRequest = async (options: any) => {
-    const { file, onSuccess, onError } = options
-    const formData = new FormData()
-    formData.append('file', file)
+  useEffect(() => {
+    getSquareData()
+  }, [])
 
-    try {
-      const response = await fetch('http://49.234.200.97:8080/file/upload', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`
-        },
-        body: formData
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        onSuccess(data)
-      } else {
-        onError(new Error('Upload failed'))
-      }
-    } catch (error) {
-      onError(error)
-    }
+  const getSquareData = async () => {
+    const res = await listSquare()
+    console.log(res.data.records)
+    setSquareData(res.data.records)
   }
   return (
     <div>
-      <Upload
-        name="file"
-        customRequest={customRequest}
-        listType="picture-card"
-        maxCount={1}
-        showUploadList={false}
-        headers={{
-          Authorization: `Bearer ${token}`
-        }}
-      >
-        (
-        <button style={{ border: 0, background: 'none' }} type="button">
-          <div style={{ marginTop: 8 }}>Upload</div>
-        </button>
-        )
-      </Upload>
+      <div className="p-6">
+        {Array.isArray(squareData) &&
+          squareData.map((item, index) => <MomentCard data={item} key={index} />)}
+      </div>
     </div>
   )
 }
