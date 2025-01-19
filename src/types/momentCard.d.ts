@@ -74,18 +74,9 @@ export interface PostVo {
  * CommentVo
  */
 export interface CommentVo {
-  /**
-   * 评论内容
-   */
-  content?: string
-  id?: number
-  /**
-   * 回复
-   */
-  reply?: CommentVo[]
-  /**
-   * 用户名
-   */
-  username?: string
-  [property: string]: any
+  username: string
+  commentId: number
+  content: string
+  postId: number
+  replies?: CommentVo[] // 回复列表
 }

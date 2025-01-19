@@ -7,6 +7,7 @@ import Chat from '@/views/Chat'
 import EditProfile from '@/views/Homepage/EditProfile'
 import FriebdList from '@/views/FriendList'
 import { Routes, Route } from 'react-router-dom'
+import UserPage from '@/components/UserPage'
 
 const LayoutPage: React.FC = () => {
   const { Header, Sider, Content } = Layout
@@ -67,6 +68,7 @@ const LayoutPage: React.FC = () => {
                 <Route path="matchingbefore" element={<MatchingBefore />} />
                 <Route path="homepage" element={<Homepage />} />
                 <Route path="Chat" element={<Chat />} />
+                <Route path="user/:userId" element={<UserPage />} />
               </Routes>
             </div>
           </Content>

@@ -168,15 +168,17 @@ const Moment: React.FC<MomentProps> = ({ activeKey }: { activeKey: string }) => 
   return (
     <>
       <div>
-        <div
-          className="flex flex-col items-center justify-center w-64 h-32 cursor-pointer mt-9 mb-14"
-          style={{ border: '1px dashed #E65AFF' }}
-          onClick={showModal}
-        >
-          <img className="w-6 h-6" src={PushmomentIcon} />
-          <div className="mt-4 text-lg text-custom-purple">发布瞬间</div>
+        <div className="flex mt-9 mb-14">
+          <div className="mr-5 text-lg">today</div>
+          <div
+            className="flex flex-col items-center justify-center w-64 h-32 cursor-pointer "
+            style={{ border: '1px dashed #E65AFF' }}
+            onClick={showModal}
+          >
+            <img className="w-6 h-6" src={PushmomentIcon} />
+            <div className="mt-4 text-lg text-custom-purple">publish moment</div>
+          </div>
         </div>
-
         <Spin spinning={loading}>
           <div>
             {Array.isArray(momentData) &&
@@ -186,15 +188,16 @@ const Moment: React.FC<MomentProps> = ({ activeKey }: { activeKey: string }) => 
       </div>
 
       <Modal
-        title="发布瞬间"
+        title=""
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
         width={800}
+        closable={false}
       >
         <div
-          className="p-4 border border-dashed border-fuchsia-500"
-          style={{ height: 'auto', minHeight: '400px' }}
+          className="p-4 mt-5 border border-dashed border-fuchsia-500"
+          style={{ height: 'auto', minHeight: '300px' }}
         >
           <Form form={form}>
             <Form.Item name="content">

@@ -4,22 +4,23 @@ import { listSquare } from '@/http/modules/square'
 import MomentCard from '@/views/Homepage/moment-card'
 
 const Square: React.FC = () => {
-  const [squareData, setSquareData] = useState<PostVo[]>([])
+  const [moments, setMoments] = useState<PostVo[]>([])
+
+  const fetchMoments = async () => {
+    const res = await listSquare()
+    setMoments(res.data?.records || [])
+  }
 
   useEffect(() => {
-    getSquareData()
+    fetchMoments()
   }, [])
 
-  const getSquareData = async () => {
-    const res = await listSquare()
-    console.log(res.data.records)
-    setSquareData(res.data.records)
-  }
   return (
     <div>
-      <div className="p-6">
-        {Array.isArray(squareData) &&
-          squareData.map((item, index) => <MomentCard data={item} key={index} />)}
+      <div className="p-6 overflow-y-auto square-content" style={{ height: 'calc(100vh - 110px)' }}>
+        {moments.map((moment) => (
+          <MomentCard key={moment.id} data={moment} onRefresh={fetchMoments} />
+        ))}
       </div>
     </div>
   )

@@ -16,7 +16,7 @@
 	overflow-y: scroll !important;
 }
 
-.ant-tabs-content-holder::-webkit-scrollbar {
+.ant-tabs-content-holder::-webkit-scrollbar, .square-content::-webkit-scrollbar {
   width: 6px; /* 垂直滚动条宽度 */
   height: 1px; /* 水平滚动条高度 */
 }
