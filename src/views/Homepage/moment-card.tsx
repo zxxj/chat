@@ -4,7 +4,7 @@ import LikeIcon from '@/assets/HomePage/like.png'
 import LikedIcon from '@/assets/HomePage/liked.png'
 import CommentIcon from '@/assets/HomePage/comment.png'
 import LookIcon from '@/assets/HomePage/look.png'
-import { Avatar, Image, Input, Button, List, Modal } from 'antd'
+import { Avatar, Image, Input, Dropdown, Button, List, Modal, Popconfirm, message } from 'antd'
 import { DownOutlined, RightOutlined, UpOutlined } from '@ant-design/icons'
 import { PostVo, CommentVo } from '@/types/momentCard'
 import dayjs from 'dayjs'
@@ -17,8 +17,14 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
+import type { MenuProps } from 'antd'
+import { deleteMomentById } from '@/http/modules/moment'
 
-const MomentCard: React.FC<{ data: PostVo; onRefresh: () => void }> = ({ data, onRefresh }) => {
+const MomentCard: React.FC<{ data: PostVo; onRefresh: () => void; activeKey: string }> = ({
+  data,
+  activeKey,
+  onRefresh
+}) => {
   const userInfo = useSelector((state: RootState) => state.user.userInfo)
 
   const navigate = useNavigate()
@@ -34,6 +40,37 @@ const MomentCard: React.FC<{ data: PostVo; onRefresh: () => void }> = ({ data, o
   const [isCommentVisible, setIsCommentVisible] = useState(false)
   const [replyTo, setReplyTo] = useState<CommentVo | null>(null)
   const [commentInputModal, setCommentInputModal] = useState(false)
+
+  const handleDelete = async () => {
+    try {
+      await deleteMomentById(data.id as number)
+      onRefresh() // 调用父组件的刷新函数
+      message.success('delete success')
+    } catch (error) {
+      console.log(error)
+      message.error('delete failed')
+    }
+  }
+
+  const items: MenuProps['items'] = [
+    {
+      key: '1',
+      label: (
+        <Popconfirm
+          title="Are you sure to delete it?"
+          onConfirm={handleDelete}
+          okText="confirm"
+          cancelText="cancel"
+        >
+          <span>Delete</span>
+        </Popconfirm>
+      )
+    },
+    {
+      key: '2',
+      label: 'Permission'
+    }
+  ]
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -171,6 +208,10 @@ const MomentCard: React.FC<{ data: PostVo; onRefresh: () => void }> = ({ data, o
     setReplyTo(null)
   }
 
+  const handleDropdownClick = (e: any) => {
+    console.log(e)
+  }
+
   return (
     <div ref={cardRef} className="flex justify-between mb-12">
       <div className="mr-6 text-center date w-14">
@@ -188,9 +229,7 @@ const MomentCard: React.FC<{ data: PostVo; onRefresh: () => void }> = ({ data, o
 
       {/* 内容部分 */}
       <div className="flex-1 content">
-        <div className="mb-4 text-lg cursor-pointer" onClick={gotoUser}>
-          {data.username}
-        </div>
+        <div className="mb-4 text-lg cursor-pointer">{data.username}</div>
         <div className="relative">
           <p
             ref={textRef}
@@ -279,8 +318,15 @@ const MomentCard: React.FC<{ data: PostVo; onRefresh: () => void }> = ({ data, o
         )}
       </div>
 
-      <div className="w-5 ml-4 handle">
-        <img src={MoreIcon} className="w-6 h-6 cursor-pointer" />
+      <div className="w-5 mr-6 handle" style={{ display: activeKey === '1' ? 'block' : 'none' }}>
+        <Dropdown
+          menu={{ items, onClick: handleDropdownClick }}
+          placement="bottomRight"
+          arrow={{ pointAtCenter: true }}
+          trigger={['click']}
+        >
+          <img src={MoreIcon} className="w-6 h-6 cursor-pointer" />
+        </Dropdown>
       </div>
 
       <Modal

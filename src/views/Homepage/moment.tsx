@@ -182,7 +182,14 @@ const Moment: React.FC<MomentProps> = ({ activeKey }: { activeKey: string }) => 
         <Spin spinning={loading}>
           <div>
             {Array.isArray(momentData) &&
-              momentData.map((item, index) => <MomentCard data={item} key={index} />)}
+              momentData.map((item, index) => (
+                <MomentCard
+                  data={item}
+                  key={index}
+                  onRefresh={listMomentByusertoken}
+                  activeKey={activeKey}
+                />
+              ))}
           </div>
         </Spin>
       </div>

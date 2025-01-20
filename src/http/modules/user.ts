@@ -29,3 +29,18 @@ export const isUsernameAvailable = (username: string) => {
 export const user = () => {
   return http.get('/user/me')
 }
+
+// 获取用户信息
+export const getUserInfoByUserId = (userId: number) => {
+  return http.get(`/user/${userId}`)
+}
+
+// 获取用户动态
+export const getUserMomentsByUserId = (userId: number) => {
+  return http.get(`/post/user/?userId=${userId}`)
+}
+
+// 已喜欢列表
+export const getLikedList = () => {
+  return http.get('/post/liked')
+}

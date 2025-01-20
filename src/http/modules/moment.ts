@@ -14,3 +14,7 @@ interface CreateMomentParams {
 export const createMoment = (data: CreateMomentParams) => {
   return http.post('/post/create', data)
 }
+
+export const deleteMomentById = (id: number) => {
+  return http.post(`/post/delete/${id}`)
+}

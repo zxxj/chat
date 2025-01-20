@@ -8,6 +8,7 @@ import EditProfile from '@/views/Homepage/EditProfile'
 import FriebdList from '@/views/FriendList'
 import { Routes, Route } from 'react-router-dom'
 import UserPage from '@/components/UserPage'
+import UserInfo from '@/components/UserInfo'
 
 const LayoutPage: React.FC = () => {
   const { Header, Sider, Content } = Layout
@@ -59,6 +60,7 @@ const LayoutPage: React.FC = () => {
               {/* <Route path="square" element={<Square />} /> */}
               <Route path="homepage" element={<EditProfile />} />
               <Route path="Chat" element={<FriebdList />} />
+              <Route path="user/:userId" element={<UserInfo />} />
             </Routes>
           </Sider>
           <Content style={contentStyle}>

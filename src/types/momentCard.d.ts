@@ -26,6 +26,7 @@ export interface OrderItem {
  * PostVo
  */
 export interface PostVo {
+  activeKey?: string
   /**
    * 地点
    */
