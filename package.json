@@ -16,6 +16,7 @@
     "@react-three/fiber": "^8.17.10",
     "@reduxjs/toolkit": "^2.5.0",
     "@types/axios": "^0.14.4",
+    "agora-rtc-react": "^2.3.0",
     "agora-rtm": "^2.2.1",
     "agora-rtx": "^2.2.0",
     "antd": "^5.22.7",

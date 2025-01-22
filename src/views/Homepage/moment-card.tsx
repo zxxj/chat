@@ -311,6 +311,18 @@ const MomentCard: React.FC<{ data: PostVo; onRefresh: () => void; activeKey: str
         {isCommentVisible && (
           <div className="mt-4">
             {/* 仅在有评论时显示评论列表 */}
+            <div className="flex items-center">
+              <Input.TextArea
+                rows={1}
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                placeholder="Post your comments"
+              />
+
+              <Button type="primary" onClick={handleCommentSubmit}>
+                comment
+              </Button>
+            </div>
             {comments.length > 0 && (
               <List className="mt-4 overflow-y-auto">{renderComments(comments)}</List>
             )}
@@ -335,6 +347,8 @@ const MomentCard: React.FC<{ data: PostVo; onRefresh: () => void; activeKey: str
         onCancel={() => setCommentInputModal(false)}
         footer={null}
         closable={false}
+        centered
+        width={900}
       >
         <div>
           <Input.TextArea

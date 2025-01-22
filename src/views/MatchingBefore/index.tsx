@@ -8,13 +8,16 @@ import { useNavigate } from 'react-router-dom'
 import Register from '@/views/Register'
 import { register, updateUserInfo, isUsernameAvailable, user } from '@/http/modules/user'
 import dayjs from 'dayjs'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setUserInfo } from '@/store/modules/user'
 import { message } from 'antd'
+import { getShengwangRTCToken } from '@/http/modules/shengwang'
+import { createMatching } from '@/http/modules/matching'
 
 const MatchingBefore: React.FC = () => {
   const { Header } = Layout
   const navigate = useNavigate()
+  const userInfo = useSelector((state: any) => state.user.userInfo)
   const [showRegisterModal, setShowRegisterModal] = useState(false)
   const registerFormRef = useRef<any>(null)
   const [infos, setInfos] = useState<any>(null)
@@ -40,7 +43,7 @@ const MatchingBefore: React.FC = () => {
       img: VoiceImg
     },
     {
-      type: 'video',
+      type: '视频匹配',
       img: VideoImg
     }
   ]
@@ -143,6 +146,34 @@ const MatchingBefore: React.FC = () => {
     }
   }, [showRegisterModal])
 
+  const handleMatching = async (type: string) => {
+    if (type === 'chat') {
+      navigate('/layout/chat')
+    } else if (type === 'voice') {
+      navigate('/layout/voice')
+    } else if (type === '视频匹配') {
+      const body = {
+        character: userInfo.character,
+        sex: userInfo.sex,
+        type
+      }
+      const res = await createMatching({ ...body })
+      if (res) {
+        getShengwangRTCToken(res.data.channelName).then((channelToken) => {
+          navigate('/layout/video', {
+            state: {
+              channelName: res.data.channelName,
+              user: res.data.user,
+              channelToken: channelToken.data
+            }
+          })
+        })
+      } else {
+        console.log('false')
+      }
+    }
+  }
+
   return (
     <div className="w-screen h-screen bg-custom-matchingbefore-bg">
       <Layout>
@@ -165,6 +196,7 @@ const MatchingBefore: React.FC = () => {
               marginLeft: index === 1 ? '73px' : '0',
               marginRight: index === 1 ? '73px' : '0'
             }}
+            onClick={() => handleMatching(item.type)}
           ></div>
         ))}
       </div>

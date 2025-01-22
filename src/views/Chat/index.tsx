@@ -1,13 +1,11 @@
 import { useEffect, useState, useCallback, useMemo, useRef } from 'react'
 import AgoraRTM from 'agora-rtx'
-// import { useSelector } from 'react-redux'
-// import { RootState } from '@/store'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store'
 import { Input, Spin } from 'antd'
 
 const { TextArea } = Input
-const appId = '63236b2c9f7a4304add688cd27857809' // 替换为你的 App ID
-const userId: any = '' // 用户 ID
-const token: string = ''
+const appId = '1a75c358653848ab8f8617178d5c52b3'
 const receiverId: string = '' // 接收人id
 const msChannelName = 'Chat_room' // 房间名
 
@@ -15,33 +13,13 @@ const Chat: React.FC = () => {
   const [client, setClient] = useState<any>(null) // 使用明确的类型
   const [messages, setMessages] = useState<{ publisher: string; message: string }[]>([])
   const [inputText, setInputText] = useState<string>('')
-  const [isSending, setIsSending] = useState(false) // 添加发送状态
-  const textAreaRef = useRef<any>(null) // 添加 ref
+  const [isSending, setIsSending] = useState(false)
+  const textAreaRef = useRef<any>(null)
 
-  // const userInfo: any = useSelector((state: RootState) => state.user.userInfo)
-
-  // - 模拟测试1v1聊天
-  // const getUserInfoFromLocalStorage = (key: string) => {
-  //   const info: any = localStorage.getItem(key)
-  //   return JSON.parse(info) as { userId: string; token: string }
-  // }
-
-  // if (userInfo.email === 'xinxinxinxinxinzzz@gmail.com') {
-  //   debugger
-  //   const parsedInfo = getUserInfoFromLocalStorage('xinxin1-test-rtm')
-  //   receiverId = 'xinxin2'
-  //   userId = parsedInfo.userId
-  //   token = parsedInfo.token
-  // } else if (userInfo.email === 'coderxin1@gmail.com') {
-  //   debugger
-  //   const parsedInfo = getUserInfoFromLocalStorage('xinxin2-test-rtm')
-  //   userId = parsedInfo.userId
-  //   receiverId = 'xinxin1'
-  //   token = parsedInfo.token
-  // }
-  // - 模拟测试1v1聊天
-
-  // 初始化 RTM 客户端并登录
+  const userInfo: any = useSelector((state: RootState) => state.user.userInfo)
+  const userId: string = String(userInfo.id)
+  const token: string = localStorage.getItem('swtk') as string
+  // 初始化RTM客户端并登录
   useEffect(() => {
     const setupRTM = async () => {
       try {
@@ -79,7 +57,8 @@ const Chat: React.FC = () => {
           }
         })
 
-        rtm.addEventListener('status', () => {
+        rtm.addEventListener('status', (e) => {
+          console.log(e, 'eeee')
           // 连接状态变化
           // setMessages((prevMessages) => [...prevMessages, `INFO: ${JSON.stringify(event)}`])
         })
@@ -98,15 +77,14 @@ const Chat: React.FC = () => {
 
     setupRTM()
 
-    // 清理事件监听器
     return () => {
       if (client) {
-        client.removeAllListeners() // 清理 RTM 监听器
+        client.removeAllListeners()
       }
     }
-  }, []) // 确保只在首次加载时运行一次
+  }, [])
 
-  // 添加一个 useEffect 来处理聚焦
+  // 聚焦
   useEffect(() => {
     if (!isSending) {
       textAreaRef.current?.focus()
@@ -160,7 +138,7 @@ const Chat: React.FC = () => {
         111
       </div>
       <div id="textDisplay" className="flex-1 overflow-y-auto">
-        <div>信息</div>
+        <div>todo</div>
         {renderedMessages}
       </div>
       <div>
@@ -171,7 +149,7 @@ const Chat: React.FC = () => {
             style={{ background: '#16132D' }}
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            placeholder="按回车发送消息"
+            placeholder="Press Enter to send the message"
             autoSize={{ minRows: 3, maxRows: 5 }}
             onPressEnter={(e) => {
               e.preventDefault()

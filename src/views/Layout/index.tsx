@@ -9,6 +9,7 @@ import FriebdList from '@/views/FriendList'
 import { Routes, Route } from 'react-router-dom'
 import UserPage from '@/components/UserPage'
 import UserInfo from '@/components/UserInfo'
+import Video from '../Video'
 
 const LayoutPage: React.FC = () => {
   const { Header, Sider, Content } = Layout
@@ -70,6 +71,7 @@ const LayoutPage: React.FC = () => {
                 <Route path="matchingbefore" element={<MatchingBefore />} />
                 <Route path="homepage" element={<Homepage />} />
                 <Route path="Chat" element={<Chat />} />
+                <Route path="Video" element={<Video />} />
                 <Route path="user/:userId" element={<UserPage />} />
               </Routes>
             </div>
