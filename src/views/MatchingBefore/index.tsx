@@ -11,7 +11,7 @@ import dayjs from 'dayjs'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserInfo } from '@/store/modules/user'
 import { message } from 'antd'
-import { getShengwangRTCToken } from '@/http/modules/shengwang'
+import { getShengwangRTCToken, getShengwangRTMToken } from '@/http/modules/shengwang'
 import { createMatching } from '@/http/modules/matching'
 
 const MatchingBefore: React.FC = () => {
@@ -35,7 +35,7 @@ const MatchingBefore: React.FC = () => {
 
   const types = [
     {
-      type: 'chat',
+      type: '文字匹配',
       img: ChatImg
     },
     {
@@ -147,8 +147,26 @@ const MatchingBefore: React.FC = () => {
   }, [showRegisterModal])
 
   const handleMatching = async (type: string) => {
-    if (type === 'chat') {
-      navigate('/layout/chat')
+    if (type === '文字匹配') {
+      const body = {
+        character: userInfo.character,
+        sex: userInfo.sex,
+        type
+      }
+      const res = await createMatching({ ...body })
+      if (res) {
+        getShengwangRTMToken().then((rtmToken) => {
+          navigate('/layout/chat', {
+            state: {
+              token: rtmToken.data,
+              channelName: res.data.channelName,
+              user: res.data.user
+            }
+          })
+        })
+      } else {
+        message.warning('创建匹配失败')
+      }
     } else if (type === 'voice') {
       navigate('/layout/voice')
     } else if (type === '视频匹配') {

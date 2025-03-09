@@ -12,21 +12,20 @@ import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import './styles.css'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store'
 
 export const Video = () => {
   const location = useLocation()
   console.log(location.state)
+  const userInfo = useSelector((state: RootState) => state.user.userInfo)
   // debugger
   const [calling, setCalling] = useState(true)
   const isConnected = useIsConnected()
   const [appId, setAppId] = useState('1a75c358653848ab8f8617178d5c52b3')
   const [channel, setChannel] = useState(location.state.channelName)
-  // const [channel, setChannel] = useState('test5')
   const [token, setToken] = useState<string | null>(location.state.channelToken)
-  // const [token, setToken] = useState<string | null>(
-  //   '007eJxTYJC98iFvqvNXvZ0mwjp+c0rTNJoWXFJ6FszswMWxk5nzopMCg2GiuWmysamFmamxhYlFYpJFmoWZobmhuUWKabKpUZJx+coJ6Q2BjAy7bvgzMjJAIIjPylCSWlxiysAAAIkPHM0='
-  // )
-  useJoin({ appid: appId, channel: channel, token: token ? token : null }, calling)
+  useJoin({ appid: appId, channel: channel, token: token, uid: userInfo.id }, calling)
   //local user
   const [micOn, setMic] = useState(true)
   const [cameraOn, setCamera] = useState(true)

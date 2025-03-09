@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import { Layout } from 'antd'
 import HeaderComponent from './HeaderComponent'
 import Square from '@/views/Square'
@@ -5,14 +6,16 @@ import MatchingBefore from '@/views/MatchingBefore'
 import Homepage from '@/views/Homepage'
 import Chat from '@/views/Chat'
 import EditProfile from '@/views/Homepage/EditProfile'
-import FriebdList from '@/views/FriendList'
+import FriendList from '@/views/FriendList'
 import { Routes, Route } from 'react-router-dom'
 import UserPage from '@/components/UserPage'
 import UserInfo from '@/components/UserInfo'
 import Video from '../Video'
+import Member from '../member'
 
 const LayoutPage: React.FC = () => {
   const { Header, Sider, Content } = Layout
+  const [selectedUser, setSelectedUser] = useState<any>(null) // 用于存储选中的用户信息
 
   const headerStyle: React.CSSProperties = {
     textAlign: 'center',
@@ -60,7 +63,7 @@ const LayoutPage: React.FC = () => {
             <Routes>
               {/* <Route path="square" element={<Square />} /> */}
               <Route path="homepage" element={<EditProfile />} />
-              <Route path="Chat" element={<FriebdList />} />
+              <Route path="Chat" element={<FriendList onSelectUser={setSelectedUser} />} />
               <Route path="user/:userId" element={<UserInfo />} />
             </Routes>
           </Sider>
@@ -70,14 +73,16 @@ const LayoutPage: React.FC = () => {
                 <Route path="square" element={<Square />} />
                 <Route path="matchingbefore" element={<MatchingBefore />} />
                 <Route path="homepage" element={<Homepage />} />
-                <Route path="Chat" element={<Chat />} />
+                <Route path="Chat" element={<Chat selectedUser={selectedUser} />} />
                 <Route path="Video" element={<Video />} />
                 <Route path="user/:userId" element={<UserPage />} />
               </Routes>
             </div>
           </Content>
 
-          <div style={{ width: '450px', marginLeft: '25px', color: '#fff', margin: '25px' }}>2</div>
+          <div style={{ width: '450px', marginTop: '25px', color: '#fff' }}>
+            <Member />
+          </div>
         </Layout>
       </Layout>
     </div>

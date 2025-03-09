@@ -1,24 +1,34 @@
 import { useEffect, useState, useCallback, useMemo, useRef } from 'react'
-import AgoraRTM from 'agora-rtx'
+import AgoraRTM from 'agora-rtm'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import { Input, Spin } from 'antd'
+import { useLocation } from 'react-router-dom'
 
 const { TextArea } = Input
 const appId = '1a75c358653848ab8f8617178d5c52b3'
-const receiverId: string = '' // 接收人id
-const msChannelName = 'Chat_room' // 房间名
 
-const Chat: React.FC = () => {
+interface ChatProps {
+  selectedUser: any
+}
+
+const Chat: React.FC<ChatProps> = ({ selectedUser }) => {
+  const [selectedUserInfo, setSelectedUserInfo] = useState<any>(null)
+  const location = useLocation()
+  const receiverId: string = location.state?.user?.id || '0' // 接收人id
+  const msChannelName = location.state?.channelName || '0' // 房间名
   const [client, setClient] = useState<any>(null) // 使用明确的类型
   const [messages, setMessages] = useState<{ publisher: string; message: string }[]>([])
   const [inputText, setInputText] = useState<string>('')
   const [isSending, setIsSending] = useState(false)
   const textAreaRef = useRef<any>(null)
 
+  console.log(location, 'locationsss')
   const userInfo: any = useSelector((state: RootState) => state.user.userInfo)
   const userId: string = String(userInfo.id)
-  const token: string = localStorage.getItem('swtk') as string
+  // const userId = 'test1'
+  // const token: string = selectedUser?.token || '0'
+  const token: string = location?.state?.token || selectedUser?.token
   // 初始化RTM客户端并登录
   useEffect(() => {
     const setupRTM = async () => {
@@ -84,6 +94,27 @@ const Chat: React.FC = () => {
     }
   }, [])
 
+  useEffect(() => {
+    if (selectedUser) {
+      console.log('Selected User:', selectedUser)
+      setSelectedUserInfo(selectedUser)
+      // 在这里可以根据 selectedUser 初始化聊天
+      // 例如，重新连接到新的聊天频道
+
+      client.history
+        .getMessages(msChannelName, 'MESSAGE', {
+          messageCount: 50,
+          end: Date.now()
+        })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  }, [selectedUser])
+
   // 聚焦
   useEffect(() => {
     if (!isSending) {
@@ -98,10 +129,14 @@ const Chat: React.FC = () => {
       setIsSending(true)
       const payload = { type: 'text', message: inputText, publisher: userId }
       const publishMessage = JSON.stringify(payload)
-      const publishOptions = { channelType: 'USER' }
+      const publishOptions = { channelType: 'MESSAGE' }
 
-      await client?.publish(receiverId, publishMessage, publishOptions)
-      setMessages((prevMessages) => [...prevMessages, { publisher: userId, message: inputText }])
+      await client.publish(msChannelName, publishMessage, receiverId, publishOptions, {
+        channelType: 'MESSAGE',
+        customType: 'STRING',
+        storeInHistory: true
+      })
+      setMessages((prevMessages) => [...prevMessages])
       setInputText('')
     } catch (status) {
       console.log('Publish Error:', status)
@@ -135,7 +170,7 @@ const Chat: React.FC = () => {
   return (
     <div className="flex flex-col w-full h-full p-6">
       <div className="border-b h-custom-49" style={{ borderColor: '#4D4868', lineHeight: '49px' }}>
-        111
+        {selectedUserInfo?.to || ''}
       </div>
       <div id="textDisplay" className="flex-1 overflow-y-auto">
         <div>todo</div>
