@@ -1,5 +1,3 @@
-一款基于React18 + redux + threejs + 声网搭建的社交网站模板
-
 - 登录页面
 ![login](/public/login.png)
 
