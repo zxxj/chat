@@ -1,4 +1,5 @@
-## 基于React18 + Redux + AntDesign + Threejs + Vite 声网搭建的（模仿soul app功能点)社交网站.
+## 基于React18 + Redux + AntDesign + Threejs + Vite 声网搭建的社交网站模板.
+- 灵感来自Soul.
 
 - 支持在线匹配与文字聊天、语音聊天及视频聊天,基于声网RTM RTC服务.
 - 已集成Google三方登录.
